@@ -6,6 +6,7 @@ const language = vi.hoisted(() => ({ locale: "en" as "en" | "ja" }));
 vi.mock("@/contexts/LanguageContext", () => ({ useLanguage: () => ({ locale: language.locale, setLocale: vi.fn() }) }));
 
 import { SATISFACTION_OPTIONS, STATION_COPY } from "@/data/stationContent";
+import { RESULT_GUIDANCE } from "@/data/resultGuidance";
 import { getSatisfactionAccessibleLabel, QuestionnaireCard, ResultCard } from "./Home";
 
 function renderSurvey(locale: "en" | "ja") {
@@ -28,6 +29,12 @@ describe("localized public station experience", () => {
     expect(renderSurvey("ja")).toContain(STATION_COPY.ja.satisfactionTitle);
     expect(renderSurvey("ja")).toContain(SATISFACTION_OPTIONS[4].label.ja);
     expect(renderResult("ja")).toContain(STATION_COPY.ja.mindPassTitle);
+  });
+  it("renders detailed, non-diagnostic score guidance in each public language", () => {
+    expect(renderResult("en")).toContain(RESULT_GUIDANCE.en.title);
+    expect(renderResult("en")).toContain(RESULT_GUIDANCE.en.items[0].body);
+    expect(renderResult("ja")).toContain(RESULT_GUIDANCE.ja.title);
+    expect(renderResult("ja")).toContain(RESULT_GUIDANCE.ja.items[1].body);
   });
   it("renders the individual counselling call to action when an owner-configured URL is available", () => {
     const html = renderResult("en", "https://counsel.example.edu/apply");

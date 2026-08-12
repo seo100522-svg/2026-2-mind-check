@@ -169,7 +169,7 @@ function DashboardLayoutContent({
               {!isCollapsed ? (
                 <div className="flex items-center gap-2 min-w-0">
                   <span className="font-semibold tracking-tight truncate">
-                    힐링오락 스테이션
+                    마음체크인: 마음체크리스트
                   </span>
                 </div>
               ) : null}
