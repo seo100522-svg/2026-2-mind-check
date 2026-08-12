@@ -1,0 +1,62 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1784965917942,
+      "tag": "0000_dapper_ravenous",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1784966600104,
+      "tag": "0001_serious_the_enforcers",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1784987433233,
+      "tag": "0002_flawless_black_queen",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1786253398426,
+      "tag": "0003_amused_vertigo",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1786253832789,
+      "tag": "0004_large_thundra",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1786409284568,
+      "tag": "0005_wide_morg",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1786427789253,
+      "tag": "0006_greedy_boomer",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1786431864681,
+      "tag": "0007_gray_princess_powerful",
+      "breakpoints": true
+    }
+  ]
+}
