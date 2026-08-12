@@ -71,3 +71,51 @@ export function getPssResultGuidance(score: number, locale: SupportedLocale): Sc
       ? { sectionTitle: "Stress check · PSS-10", range: "27–40", title: "Active stress management may be helpful now", paragraphs: ["Stress in daily life is showing at a fairly high level. Several burdens may be building up at once, or situations may feel hard to control.", "Rather than enduring it alone, consider reviewing your current stressors and coping methods with a professional. You can use professional support such as individual counselling at the Student Counselling Center."], disclaimer: pssDisclaimer.en, tone: "coral", scaleDescription }
       : { sectionTitle: "ストレスチェック · PSS-10", range: "27〜40点", title: "積極的なストレス管理が必要かもしれません", paragraphs: ["現在、日常で感じているストレスがかなり高い水準で表れています。さまざまな負担が一度に重なっている、または状況をコントロールしにくいと感じている可能性があります。", "一人で耐えるよりも、現在のストレス要因と対処方法を専門家と一緒に確認することをおすすめします。学生相談センターの個別相談など、専門的な支援を活用してみてください。"], disclaimer: pssDisclaimer.ja, tone: "coral", scaleDescription };
 }
+
+export type RecoveryTip = { title: string; body: string };
+
+export type RecoveryTips = { title: string; lead: string; items: RecoveryTip[] };
+
+export function getRecoveryTips(kind: "cesd" | "pss", score: number, locale: SupportedLocale): RecoveryTips {
+  if (kind === "cesd") {
+    if (score <= 20) {
+      return locale === "ko"
+        ? { title: "오늘을 위한 회복 팁", lead: "지금 유지하고 있는 생활 리듬을 가볍게 지켜보세요.", items: [{ title: "하루의 리듬을 지켜보세요", body: "이번 주에도 잠드는 시간, 식사 시간, 가벼운 움직임 중 한 가지를 일정하게 유지해 보세요." }, { title: "기분을 짧게 기록해 보세요", body: "하루가 끝날 때 괜찮았던 순간 한 가지와 힘들었던 순간 한 가지를 적어 보면 내게 도움이 되는 활동을 알아차리는 데 도움이 됩니다." }] }
+        : locale === "en"
+          ? { title: "Recovery tips for today", lead: "Gently protect the rhythms that are already supporting you.", items: [{ title: "Keep one daily rhythm", body: "This week, try to keep one routine—such as bedtime, meals, or light movement—fairly consistent." }, { title: "Make a brief mood note", body: "At the end of the day, note one moment that felt okay and one that felt difficult. This can help you notice what supports you." }] }
+          : { title: "今日のための回復のヒント", lead: "今の自分を支えている生活リズムを、無理のない範囲で守ってみましょう。", items: [{ title: "一つの生活リズムを保ちましょう", body: "今週は、就寝時間、食事、軽い運動のうち一つを、できるだけ一定に保ってみてください。" }, { title: "気分を短く記録してみましょう", body: "一日の終わりに、よかった瞬間と大変だった瞬間を一つずつ書くと、自分を支えることに気づきやすくなります。" }] };
+    }
+    if (score <= 24) {
+      return locale === "ko"
+        ? { title: "오늘을 위한 회복 팁", lead: "부담을 줄이고, 회복할 시간을 의식적으로 만들어 보세요.", items: [{ title: "10분의 빈틈을 예약하세요", body: "하루 중 10분만 알림을 끄고, 천천히 걷거나 창밖을 보는 시간을 미리 정해 보세요." }, { title: "해야 할 일을 작게 나누세요", body: "가장 부담스러운 일을 10분 안에 시작할 수 있는 첫 단계로 나누고, 오늘은 그 첫 단계만 해도 충분하다고 정해 보세요." }] }
+        : locale === "en"
+          ? { title: "Recovery tips for today", lead: "Reduce the load where you can and deliberately make room to recover.", items: [{ title: "Schedule a 10-minute pause", body: "Choose one 10-minute time each day to silence alerts, walk slowly, or simply look out the window." }, { title: "Make tasks smaller", body: "Break the heaviest task into a first step you can start within 10 minutes, and let that first step be enough for today." }] }
+          : { title: "今日のための回復のヒント", lead: "負担を少し減らし、回復のための時間を意識して作ってみましょう。", items: [{ title: "10分の余白を予定に入れましょう", body: "一日の中で10分だけ通知をオフにし、ゆっくり歩く、窓の外を見るなどの時間をあらかじめ決めてみてください。" }, { title: "やることを小さく分けましょう", body: "一番負担に感じることを、10分以内に始められる最初の一歩に分け、今日はその一歩だけでも十分だと決めてみましょう。" }] };
+    }
+    return locale === "ko"
+      ? { title: "오늘을 위한 회복 팁", lead: "혼자 버티기보다, 기본적인 돌봄과 연결을 먼저 챙겨 보세요.", items: [{ title: "오늘 연락할 사람을 한 명 정해 보세요", body: "친구·가족·지도교수·상담센터 중 한 곳에 ‘요즘 조금 힘들다’고 짧게 알릴 수 있는 사람이나 곳을 정해 보세요." }, { title: "기본 돌봄을 가장 작게 시작하세요", body: "물 마시기, 간단히 먹기, 씻기, 잠자리에 들기 중 지금 가능한 한 가지를 먼저 해 보세요. 모든 것을 한꺼번에 해결할 필요는 없습니다." }] }
+      : locale === "en"
+        ? { title: "Recovery tips for today", lead: "Rather than carrying this alone, start with basic care and connection.", items: [{ title: "Choose one person or place to contact", body: "Choose a friend, family member, instructor, or counselling center you can briefly tell: “I have been having a hard time lately.”" }, { title: "Start with the smallest basic-care step", body: "Try one possible step first: drink water, eat something simple, wash up, or get ready for bed. You do not need to solve everything at once." }] }
+        : { title: "今日のための回復のヒント", lead: "一人で抱え込むよりも、基本的なケアとつながりを先に大切にしてみましょう。", items: [{ title: "今日連絡する人や場所を一つ決めましょう", body: "友人・家族・指導教員・相談センターの中から、「最近少しつらい」と短く伝えられる人や場所を一つ決めてみてください。" }, { title: "一番小さなセルフケアから始めましょう", body: "水を飲む、簡単に食べる、身支度をする、寝る準備をするなど、今できる一つから始めてみてください。すべてを一度に解決する必要はありません。" }] };
+  }
+
+  if (score <= 13) {
+    return locale === "ko"
+      ? { title: "오늘을 위한 회복 팁", lead: "현재 효과가 있는 나만의 스트레스 관리 방식을 계속 활용해 보세요.", items: [{ title: "잘 된 방법을 이름 붙여 보세요", body: "최근 도움이 되었던 휴식 방법 하나를 적어 두고, 다음에 바쁠 때도 바로 꺼내 쓸 수 있게 해 보세요." }, { title: "작은 점검 시간을 남겨 두세요", body: "주 1회 5분만 이번 주의 부담과 회복 시간을 돌아보며, 다음 주에 유지할 한 가지를 정해 보세요." }] }
+      : locale === "en"
+        ? { title: "Recovery tips for today", lead: "Keep using the stress-management practices that are working for you.", items: [{ title: "Name what has been helping", body: "Write down one rest practice that has helped recently so it is easy to return to when life becomes busy." }, { title: "Leave room for a short check-in", body: "Once a week, take five minutes to notice your stress and recovery time, then choose one helpful practice to continue next week." }] }
+        : { title: "今日のための回復のヒント", lead: "今うまくいっている自分なりのストレス管理方法を、これからも活用してみましょう。", items: [{ title: "役立った方法に名前をつけましょう", body: "最近助けになった休息方法を一つ書き留め、忙しくなったときにもすぐに使えるようにしてみてください。" }, { title: "短い振り返りの時間を残しましょう", body: "週に一度5分だけ、今週の負担と回復の時間を振り返り、来週も続ける一つを決めてみてください。" }] };
+  }
+  if (score <= 26) {
+    return locale === "ko"
+      ? { title: "오늘을 위한 회복 팁", lead: "회복 시간을 일정으로 지키고, 부담을 한 가지씩 분리해 보세요.", items: [{ title: "회복 시간을 일정에 넣으세요", body: "수면·휴식·운동·취미 중 하나를 이번 주 일정에 먼저 적고, 다른 약속처럼 지켜 보세요." }, { title: "부담을 나눠 적어 보세요", body: "지금의 부담을 ‘내가 할 수 있는 일’과 ‘도움을 요청할 일’로 나누어 적으면 혼자 떠안는 느낌을 줄이는 데 도움이 됩니다." }] }
+      : locale === "en"
+        ? { title: "Recovery tips for today", lead: "Protect recovery time in your schedule and separate burdens one at a time.", items: [{ title: "Put recovery time on the calendar", body: "Schedule one period for sleep, rest, movement, or a hobby this week and treat it like another appointment." }, { title: "Separate the burdens", body: "Write down what feels heavy in two groups: what you can do and what you can ask for help with. This can make the load feel less solitary." }] }
+        : { title: "今日のための回復のヒント", lead: "回復の時間を予定として守り、負担を一つずつ分けてみましょう。", items: [{ title: "回復の時間を予定に入れましょう", body: "睡眠・休息・運動・趣味のうち一つを今週の予定に先に入れ、ほかの約束と同じように守ってみてください。" }, { title: "負担を分けて書いてみましょう", body: "今の負担を「自分でできること」と「助けを求めること」に分けて書くと、一人で抱え込む感覚を減らす助けになります。" }] };
+  }
+  return locale === "ko"
+    ? { title: "오늘을 위한 회복 팁", lead: "지금은 부담을 덜고, 도움을 연결하는 일을 우선순위에 두어 보세요.", items: [{ title: "오늘 미룰 수 있는 일을 찾아보세요", body: "꼭 오늘 해야 하는 일과 미뤄도 되는 일을 구분해 보고, 한 가지라도 일정에서 덜어내 보세요." }, { title: "상담 연결을 작은 다음 단계로 삼으세요", body: "학생상담센터 상담 신청 페이지를 열어 보거나, 운영 시간에 문의 전화를 해 보세요. 연결을 시작하는 것만으로도 충분한 첫걸음입니다." }] }
+    : locale === "en"
+      ? { title: "Recovery tips for today", lead: "For now, prioritize lightening the load and connecting with support.", items: [{ title: "Find one thing to postpone", body: "Separate what truly needs to happen today from what can wait, and try removing at least one item from your schedule." }, { title: "Make connecting with counselling the next small step", body: "Open the Student Counselling Center application page or call during opening hours. Starting the connection is a meaningful first step." }] }
+      : { title: "今日のための回復のヒント", lead: "今は、負担を減らし、支援につながることを優先してみましょう。", items: [{ title: "今日先延ばしにできることを探しましょう", body: "今日必ず必要なことと待てることを分け、予定から一つでも減らしてみてください。" }, { title: "相談につながることを小さな次の一歩にしましょう", body: "学生相談センターの相談申込みページを開く、または運営時間内に問い合わせの電話をしてみてください。つながりを始めるだけでも十分な第一歩です。" }] };
+}

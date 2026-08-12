@@ -7,7 +7,7 @@ vi.mock("@/contexts/LanguageContext", () => ({ useLanguage: () => ({ locale: lan
 
 import { SATISFACTION_OPTIONS, STATION_COPY } from "@/data/stationContent";
 import { getCesdResultGuidance, getPssResultGuidance } from "@/data/scoreResultGuidance";
-import { getSatisfactionAccessibleLabel, QuestionnaireCard, ResultCard } from "./Home";
+import { DEFAULT_COUNSELING_APPLICATION_URL, getSatisfactionAccessibleLabel, QuestionnaireCard, ResultCard } from "./Home";
 
 function renderSurvey(locale: "en" | "ja") {
   language.locale = locale;
@@ -38,9 +38,16 @@ describe("localized public station experience", () => {
     expect(renderResult("ko", { cesdScore: 25, pssScore: 27 })).toContain("CES-D는 우울증을 진단하는 검사가 아니라");
     expect(renderResult("ko", { cesdScore: 25, pssScore: 27 })).toContain("PSS-10은 최근 1개월 동안");
   });
+  it("always renders tailored recovery tips and an official counselling link", () => {
+    const html = renderResult("ko", { cesdScore: 25, pssScore: 27 });
+    expect(html).toContain("오늘을 위한 회복 팁");
+    expect(html).toContain("오늘 연락할 사람을 한 명 정해 보세요");
+    expect(html).toContain("오늘 미룰 수 있는 일을 찾아보세요");
+    expect(html).toContain(DEFAULT_COUNSELING_APPLICATION_URL);
+  });
   it("renders the individual counselling call to action when an owner-configured URL is available", () => {
     const html = renderResult("en", { counselingApplicationUrl: "https://counsel.example.edu/apply" });
-    expect(html).toContain(STATION_COPY.en.counselingTitle);
+    expect(html).toContain(STATION_COPY.en.counselingButton);
     expect(html).toContain("https://counsel.example.edu/apply");
   });
   it("creates an icon-free accessible name for satisfaction option labels", () => {
