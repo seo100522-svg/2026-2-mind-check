@@ -13,4 +13,9 @@ describe("healing play station locales", () => {
     expect(STATION_COPY.en.mindPassTitle).toBeTruthy();
     expect(STATION_COPY.ja.mindPassTitle).toBeTruthy();
   });
+
+  it("uses gentle, non-assessment-first copy on the Korean welcome screen", () => {
+    expect(STATION_COPY.ko.welcomeLead).toBe("잠시 나에게 집중해 보는 가벼운 마음 체크 시간이에요.");
+    expect(STATION_COPY.ko.start).toBe("가볍게 시작하기");
+  });
 });
