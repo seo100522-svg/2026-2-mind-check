@@ -65,7 +65,7 @@ export default function DashboardLayout({
               관리자 로그인이 필요합니다
             </h1>
             <p className="text-sm text-muted-foreground text-center max-w-sm">
-              문항 편집과 응답 집계는 프로젝트 관리자만 이용할 수 있습니다.
+              결과 확인과 원자료 엑셀(.xlsx) 다운로드는 프로젝트 관리자만 이용할 수 있습니다.
             </p>
           </div>
           <Button
@@ -73,7 +73,7 @@ export default function DashboardLayout({
             size="lg"
             className="w-full shadow-lg hover:shadow-xl transition-all"
           >
-            로그인하기
+            운영자 로그인하기
           </Button>
         </div>
       </div>

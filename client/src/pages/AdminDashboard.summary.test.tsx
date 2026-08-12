@@ -30,6 +30,7 @@ describe("OwnerAccessGate", () => {
   it("blocks a non-owner from seeing protected dashboard content", () => {
     const html = renderToStaticMarkup(<OwnerAccessGate isLoading={false} canManage={false}><div>원자료 CSV</div></OwnerAccessGate>);
     expect(html).toContain("소유자 전용 운영 화면입니다");
+    expect(html).toContain("원자료 엑셀(.xlsx) 다운로드");
     expect(html).toContain("공개 체크리스트로 돌아가기");
     expect(html).not.toContain("원자료 CSV");
   });
