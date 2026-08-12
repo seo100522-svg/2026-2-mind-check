@@ -96,6 +96,8 @@ button:disabled { opacity: .55; cursor: not-allowed; }
 .brand-lockup small { display: block; color: #5f4b41; margin-top: 4px; font-size: .66rem; font-weight: 700; letter-spacing: .05em; }
 .app-header__actions { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 10px; }
 .privacy-pill { display: inline-flex; align-items: center; gap: 5px; border: 1.5px solid #17120f; padding: 6px 9px; border-radius: 999px; background: #fff7f1; color: #4d3c33; font-size: .69rem; font-weight: 700; white-space: nowrap; }
+.operator-entry { background: #17120f; color: #fffaf6; box-shadow: 2px 2px 0 #f5b0a1; text-decoration: none; }
+.operator-entry:hover { background: #40322c; }
 .admin-link { color: inherit; font-size: .75rem; font-weight: 800; text-decoration: none; padding: 7px 9px; border-bottom: 2px solid #17120f; }
 .admin-link:hover { background: #eadbff; }
 .language-switch { display: flex; align-items: center; border: 1.5px solid #17120f; border-radius: 999px; overflow: hidden; background: #fffaf6; padding: 3px; }
@@ -177,6 +179,10 @@ button:disabled { opacity: .55; cursor: not-allowed; }
 
 @media (max-width: 800px) {
   .app-header { min-height: 78px; align-items: flex-start; padding: 14px 0; }.app-header__actions { gap: 7px; }.privacy-pill { display: none; }.brand-lockup small { max-width: 145px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }.welcome-grid { grid-template-columns: 1fr; padding-top: 22px; }.welcome-poster { width: min(100%, 460px); height: 410px; justify-self: center; }.welcome-notes { grid-template-columns: 1fr; margin-top: 3px; }.stage-label__copy small { display: none; }.stage-label__copy strong { font-size: .55rem; }.questionnaire-card__topline { align-items: flex-start; }.answer-options--four, .answer-options--five { grid-template-columns: 1fr 1fr; }.answer-option { align-items: flex-start; font-size: .77rem; }.student-fields { grid-template-columns: 1fr; }.student-field--wide { grid-column: auto; }.result-grid { grid-template-columns: 1fr; }.mallangi-result { grid-row: auto; min-height: 365px; }.crisis-panel { grid-template-columns: auto minmax(0,1fr); }.crisis-panel__contacts { grid-column: 1 / -1; margin-left: 63px; }.result-footer { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 800px) {
+  .privacy-pill.operator-entry { display: inline-flex; padding: 6px 8px; font-size: .68rem; }
 }
 
 @media (max-width: 520px) {
