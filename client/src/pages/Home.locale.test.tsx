@@ -2,11 +2,11 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
-const language = vi.hoisted(() => ({ locale: "en" as "en" | "ja" }));
+const language = vi.hoisted(() => ({ locale: "en" as "ko" | "en" | "ja" }));
 vi.mock("@/contexts/LanguageContext", () => ({ useLanguage: () => ({ locale: language.locale, setLocale: vi.fn() }) }));
 
 import { SATISFACTION_OPTIONS, STATION_COPY } from "@/data/stationContent";
-import { RESULT_GUIDANCE } from "@/data/resultGuidance";
+import { getCesdResultGuidance, getPssResultGuidance } from "@/data/scoreResultGuidance";
 import { getSatisfactionAccessibleLabel, QuestionnaireCard, ResultCard } from "./Home";
 
 function renderSurvey(locale: "en" | "ja") {
@@ -14,30 +14,32 @@ function renderSurvey(locale: "en" | "ja") {
   return renderToStaticMarkup(<QuestionnaireCard kind="satisfaction" questionIndex={0} total={1} question={locale === "en" ? "The station was fun." : "ステーションは楽しかった。"} options={SATISFACTION_OPTIONS.map(option => ({ value: option.value, label: option.label[locale] }))} onChoose={() => undefined} onBack={() => undefined} onNext={() => undefined} nextLabel="Next" />);
 }
 
-function renderResult(locale: "en" | "ja", counselingApplicationUrl = "") {
+function renderResult(locale: "ko" | "en" | "ja", options: { cesdScore?: number; pssScore?: number; counselingApplicationUrl?: string } = {}) {
   language.locale = locale;
-  return renderToStaticMarkup(<ResultCard result={{ cesdScore: 10, pssScore: 12, counselingContactConsent: false, satisfactionAnswerCount: 5 }} counselingApplicationUrl={counselingApplicationUrl} onRestart={() => undefined} />);
+  return renderToStaticMarkup(<ResultCard result={{ cesdScore: options.cesdScore ?? 10, pssScore: options.pssScore ?? 12, counselingContactConsent: false, satisfactionAnswerCount: 5 }} counselingApplicationUrl={options.counselingApplicationUrl ?? ""} onRestart={() => undefined} />);
 }
 
 describe("localized public station experience", () => {
-  it("renders the English satisfaction step and Mind Pass guidance", () => {
+  it("renders the English satisfaction step and score-specific guidance", () => {
     expect(renderSurvey("en")).toContain(STATION_COPY.en.satisfactionTitle);
     expect(renderSurvey("en")).toContain(SATISFACTION_OPTIONS[0].label.en);
-    expect(renderResult("en")).toContain(STATION_COPY.en.mindPassTitle);
+    expect(renderResult("en")).toContain(getCesdResultGuidance(10, "en").title);
   });
-  it("renders the Japanese satisfaction step and Mind Pass guidance", () => {
+  it("renders the Japanese satisfaction step and score-specific guidance", () => {
     expect(renderSurvey("ja")).toContain(STATION_COPY.ja.satisfactionTitle);
     expect(renderSurvey("ja")).toContain(SATISFACTION_OPTIONS[4].label.ja);
-    expect(renderResult("ja")).toContain(STATION_COPY.ja.mindPassTitle);
+    expect(renderResult("ja")).toContain(getPssResultGuidance(12, "ja").title);
   });
-  it("renders detailed, non-diagnostic score guidance in each public language", () => {
-    expect(renderResult("en")).toContain(RESULT_GUIDANCE.en.title);
-    expect(renderResult("en")).toContain(RESULT_GUIDANCE.en.items[0].body);
-    expect(renderResult("ja")).toContain(RESULT_GUIDANCE.ja.title);
-    expect(renderResult("ja")).toContain(RESULT_GUIDANCE.ja.items[1].body);
+  it("renders the requested Korean guidance for each CES-D and PSS-10 score band", () => {
+    expect(renderResult("ko", { cesdScore: 20, pssScore: 13 })).toContain("마음이 비교적 안정적이에요");
+    expect(renderResult("ko", { cesdScore: 24, pssScore: 26 })).toContain("마음에 조금 더 관심이 필요해요");
+    expect(renderResult("ko", { cesdScore: 25, pssScore: 27 })).toContain("지금은 적극적인 마음 돌봄이 필요해요");
+    expect(renderResult("ko", { cesdScore: 25, pssScore: 27 })).toContain("적극적인 스트레스 관리가 필요해요");
+    expect(renderResult("ko", { cesdScore: 25, pssScore: 27 })).toContain("CES-D는 우울증을 진단하는 검사가 아니라");
+    expect(renderResult("ko", { cesdScore: 25, pssScore: 27 })).toContain("PSS-10은 최근 1개월 동안");
   });
   it("renders the individual counselling call to action when an owner-configured URL is available", () => {
-    const html = renderResult("en", "https://counsel.example.edu/apply");
+    const html = renderResult("en", { counselingApplicationUrl: "https://counsel.example.edu/apply" });
     expect(html).toContain(STATION_COPY.en.counselingTitle);
     expect(html).toContain("https://counsel.example.edu/apply");
   });
