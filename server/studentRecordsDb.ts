@@ -12,8 +12,8 @@ type StudentRecordSubmission = {
   locale: SupportedLocale;
   studentName: string;
   studentId: string;
-  contactNumber: string;
   department: string;
+  contactNumber: string;
   personalDataConsent: true;
   counselingContactConsent: boolean;
   cesdScore: number;
@@ -46,8 +46,8 @@ export function buildKoreanStudentRecord(input: StudentRecordSubmission, ordered
   return {
     studentId: input.studentId,
     studentName: input.studentName,
-    contactNumber: input.contactNumber,
     department: input.department,
+    contactNumber: input.contactNumber,
     locale: input.locale,
     personalDataConsent: true,
     personalDataConsentAt: submittedAt,
@@ -97,7 +97,7 @@ export async function getIdentifiedAssessmentResponses(limit = 100, department?:
   if (!db) return [];
   const departmentFilter = normalizedDepartment(department);
   const rows = await db.select().from(studentMindCheckRecords).where(departmentFilter ? eq(studentMindCheckRecords.department, departmentFilter) : undefined).orderBy(desc(studentMindCheckRecords.submittedAt)).limit(limit);
-  return rows.map(row => ({ id: row.recordId, studentName: row.studentName, studentId: row.studentId, contactNumber: row.contactNumber, department: row.department, locale: row.locale, cesdScore: row.cesdScore, pssScore: row.pssScore, ...toSummary(row), personalDataConsent: row.personalDataConsent, personalDataConsentAt: row.personalDataConsentAt, counselingContactConsent: row.counselingContactConsent, counselingContactConsentAt: row.counselingContactConsentAt, createdAt: row.submittedAt }));
+  return rows.map(row => ({ id: row.recordId, studentName: row.studentName, studentId: row.studentId, department: row.department, contactNumber: row.contactNumber, locale: row.locale, cesdScore: row.cesdScore, pssScore: row.pssScore, ...toSummary(row), personalDataConsent: row.personalDataConsent, personalDataConsentAt: row.personalDataConsentAt, counselingContactConsent: row.counselingContactConsent, counselingContactConsentAt: row.counselingContactConsentAt, createdAt: row.submittedAt }));
 }
 
 export async function getRawAssessmentExportRows(department?: string) {
@@ -105,7 +105,7 @@ export async function getRawAssessmentExportRows(department?: string) {
   if (!db) return [];
   const departmentFilter = normalizedDepartment(department);
   const rows = await db.select().from(studentMindCheckRecords).where(departmentFilter ? eq(studentMindCheckRecords.department, departmentFilter) : undefined).orderBy(desc(studentMindCheckRecords.submittedAt));
-  return rows.map(row => ({ id: row.recordId, studentName: row.studentName, studentId: row.studentId, contactNumber: row.contactNumber, department: row.department, locale: row.locale, cesdScore: row.cesdScore, pssScore: row.pssScore, ...toSummary(row), cesdAnswers: row.cesdAnswers, pssAnswers: row.pssAnswers, satisfactionAnswers: JSON.stringify(toSatisfactionAnswers(row)), personalDataConsent: row.personalDataConsent, personalDataConsentAt: row.personalDataConsentAt, counselingContactConsent: row.counselingContactConsent, counselingContactConsentAt: row.counselingContactConsentAt, createdAt: row.submittedAt }));
+  return rows.map(row => ({ id: row.recordId, studentName: row.studentName, studentId: row.studentId, department: row.department, contactNumber: row.contactNumber, locale: row.locale, cesdScore: row.cesdScore, pssScore: row.pssScore, ...toSummary(row), cesdAnswers: row.cesdAnswers, pssAnswers: row.pssAnswers, satisfactionAnswers: JSON.stringify(toSatisfactionAnswers(row)), personalDataConsent: row.personalDataConsent, personalDataConsentAt: row.personalDataConsentAt, counselingContactConsent: row.counselingContactConsent, counselingContactConsentAt: row.counselingContactConsentAt, createdAt: row.submittedAt }));
 }
 
 export async function getCounselingContactCandidates(limit = 100, department?: string) {
@@ -113,7 +113,7 @@ export async function getCounselingContactCandidates(limit = 100, department?: s
   if (!db) return [];
   const departmentFilter = normalizedDepartment(department);
   const rows = await db.select().from(studentMindCheckRecords).where(and(eq(studentMindCheckRecords.counselingContactConsent, true), departmentFilter ? eq(studentMindCheckRecords.department, departmentFilter) : undefined)).orderBy(desc(studentMindCheckRecords.submittedAt)).limit(limit);
-  return rows.map(row => ({ id: row.recordId, studentName: row.studentName, studentId: row.studentId, contactNumber: row.contactNumber, department: row.department, cesdScore: row.cesdScore, pssScore: row.pssScore, counselingContactConsent: row.counselingContactConsent, counselingContactConsentAt: row.counselingContactConsentAt, createdAt: row.submittedAt }));
+  return rows.map(row => ({ id: row.recordId, studentName: row.studentName, studentId: row.studentId, department: row.department, contactNumber: row.contactNumber, cesdScore: row.cesdScore, pssScore: row.pssScore, counselingContactConsent: row.counselingContactConsent, counselingContactConsentAt: row.counselingContactConsentAt, createdAt: row.submittedAt }));
 }
 
 export async function getAssessmentStats(department?: string) {

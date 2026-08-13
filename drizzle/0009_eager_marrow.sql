@@ -1,0 +1,1 @@
+ALTER TABLE `학생_마음체크_기록` MODIFY COLUMN `연락처` varchar(30) NOT NULL DEFAULT '';

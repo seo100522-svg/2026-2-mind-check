@@ -6,7 +6,7 @@ export type ScoreGuide = { label: string; detail: string; tone: "mint" | "yellow
 
 export const UI_COPY: Record<SupportedLocale, {
   anonymousTitle: string; anonymousBody: string; sequenceTitle: string; intakeSequence: string; intakeTitle: string; intakeLead: string; collectionTitle: string; collectionBody: string;
-  studentName: string; studentId: string; department: string; studentNamePlaceholder: string; studentIdPlaceholder: string; departmentPlaceholder: string; consentTitle: string; personalDataConsent: string; contactConsent: string; contactConsentDetail: string; consentRequired: string; continueChecklist: string;
+  studentName: string; studentId: string; department: string; contactNumber?: string; studentNamePlaceholder: string; studentIdPlaceholder: string; departmentPlaceholder: string; contactNumberPlaceholder?: string; prizeContactNotice?: string; consentTitle: string; personalDataConsent: string; contactConsent: string; contactConsentDetail: string; consentRequired: string; continueChecklist: string;
   contactConsentResultOn: string; contactConsentResultOff: string; cesdSequence: string; pssSequence: string; resultSequence: string; cesdTitle: string; cesdLead: string; pssTitle: string; pssLead: string; chooseOne: string; previous: string; next: string; seeResult: string; question: string; of: string; score: string; outOf: string; cesdScoreTitle: string; pssScoreTitle: string; privacyResult: string; disclaimerTitle: string; disclaimerBody: string; crisisTitle: string; crisisBody: string; currentHelp: string; studentCounselingHelp: string; emergencyHelp: string; restart: string; saveError: string; selectRequired: string; saving: string;
 }> = {
   ko: {
@@ -19,6 +19,34 @@ export const UI_COPY: Record<SupportedLocale, {
     anonymousTitle: "学生支援に必要な情報だけを受け取ります。", anonymousBody: "氏名・学籍番号・所属学科とチェック回答は、同意された目的の範囲で学生支援記録として保存されます。個人情報の同意と相談センターからの連絡同意は分けて確認します。", sequenceTitle: "5 STEPS, ONE PLAYFUL PAUSE", intakeSequence: "基本情報・同意", intakeTitle: "学生支援のための\n基本情報", intakeLead: "このチェックを学生支援につなげるため、以下の情報を確認してください。", collectionTitle: "収集・利用のお知らせ", collectionBody: "収集項目：氏名、学籍番号、所属学科、チェック回答・スコア、同意記録。利用目的：結果の確認と学生支援。", studentName: "氏名", studentId: "学籍番号", department: "学科", studentNamePlaceholder: "氏名を入力してください", studentIdPlaceholder: "学籍番号を入力してください", departmentPlaceholder: "所属学科を入力してください", consentTitle: "同意確認", personalDataConsent: "上記の収集・利用案内を確認し、個人情報とチェック結果の収集・利用に同意します。（必須）", contactConsent: "チェック結果に応じて学生相談センターから連絡を受けることに同意します。", contactConsentDetail: "結果により支援が役立つ場合にのみ参照されます。（任意）", consentRequired: "氏名・学籍番号・学科を入力し、個人情報の収集・利用に同意すると続行できます。", continueChecklist: "チェックリストへ進む", contactConsentResultOn: "今日のこころを確認しましょう", contactConsentResultOff: "今日のこころを確認しましょう", cesdSequence: "この1週間のこころ", pssSequence: "この1か月のストレス", resultSequence: "結果を見る", cesdTitle: "こころのチェックリスト", cesdLead: "この1週間の気持ちや行動を思い出して選んでください。", pssTitle: "ストレスチェック", pssLead: "この1か月を思い出し、各経験がどのくらい頻繁にあったか選んでください。", chooseOne: "一つ選んでください。", previous: "前へ", next: "次へ", seeResult: "結果を見る", question: "質問", of: "/", score: "スコア", outOf: "/", cesdScoreTitle: "こころのサイン", pssScoreTitle: "ストレス温度", privacyResult: "氏名・学籍番号・学科・同意記録とチェック回答は、学生支援の目的で分離された保護テーブルに保存されます。", disclaimerTitle: "必ずお読みください", disclaimerBody: "この結果は医療・心理学上の診断や治療の助言ではありません。つらさが続く、または日常生活に影響する場合は、学生相談センターを利用してください。", crisisTitle: "今すぐ支援が必要なとき", crisisBody: "自分を傷つけたい気持ちがある、または差し迫った危険を感じる場合は、一人で抱えず、今すぐ助けを求めてください。", currentHelp: "韓国自殺予防相談電話 109", studentCounselingHelp: "学生相談センター +82-41-530-2856", emergencyHelp: "緊急時：112 または 119", restart: "最初からやり直す", saveError: "結果を保存できませんでした。少し待ってからもう一度お試しください。", selectRequired: "次へ進む前に一つ選んでください。", saving: "結果をまとめています…",
   },
 };
+
+Object.assign(UI_COPY.ko, {
+  contactNumber: "연락처",
+  contactNumberPlaceholder: "결과 안내를 받을 수 있는 연락처",
+  prizeContactNotice: "결과에 따라 안내를 받을 번호를 입력해주세요. 입력한 연락처는 학생 지원 목적 외에는 사용하지 않습니다.",
+  anonymousBody: "이름·학번·학과·연락처와 점검 응답은 동의한 목적 안에서만 학생 지원 기록으로 저장됩니다. 개인정보 제공과 상담센터 연락 동의는 분리해 확인합니다.",
+  collectionBody: "수집 항목: 이름, 학번, 학과, 연락처, 체크리스트 응답·점수 및 동의 기록  /  이용 목적: 점검 결과 확인, 학생 지원 및 결과 안내",
+  consentRequired: "이름·학번·학과·연락처를 입력하고 개인정보 수집·이용에 동의해야 진행할 수 있어요.",
+  privacyResult: "이름·학번·학과·연락처·동의 기록과 점검 응답은 학생 지원 및 결과 안내 목적의 분리된 보호 테이블에 저장됩니다.",
+});
+Object.assign(UI_COPY.en, {
+  contactNumber: "Contact number",
+  contactNumberPlaceholder: "A number for result-based guidance",
+  prizeContactNotice: "Enter a number where you can receive guidance based on your result. It will be used only for student-support purposes.",
+  anonymousBody: "Your name, student ID, department, contact number, and responses are saved only as a student-support record for consented purposes. Privacy consent and counselling-center contact consent are collected separately.",
+  collectionBody: "Collected: name, student ID, department, contact number, checklist responses/scores, and consent records. Purpose: reviewing results, student support, and result-based guidance.",
+  consentRequired: "Enter your name, student ID, department, and contact number, then agree to personal-data collection and use to continue.",
+  privacyResult: "Your name, student ID, department, contact number, consent record, and check-in response are stored in separated protected tables for student-support and result-guidance purposes.",
+});
+Object.assign(UI_COPY.ja, {
+  contactNumber: "連絡先",
+  contactNumberPlaceholder: "結果に応じた案内を受け取れる連絡先",
+  prizeContactNotice: "結果に応じた案内を受け取れる番号を入力してください。入力した連絡先は学生支援の目的以外には使用しません。",
+  anonymousBody: "氏名・学籍番号・所属学科・連絡先とチェック回答は、同意された目的の範囲で学生支援記録として保存されます。個人情報の同意と相談センターからの連絡同意は分けて確認します。",
+  collectionBody: "収集項目：氏名、学籍番号、所属学科、連絡先、チェック回答・スコア、同意記録。利用目的：結果の確認、学生支援、結果に応じた案内。",
+  consentRequired: "氏名・学籍番号・学科・連絡先を入力し、個人情報の収集・利用に同意すると続行できます。",
+  privacyResult: "氏名・学籍番号・学科・連絡先・同意記録とチェック回答は、学生支援と結果に応じた案内の目的で分離された保護テーブルに保存されます。",
+});
 
 export const CESD_RESPONSE_OPTIONS: Array<{ value: number; label: LocalizedText }> = [
   { value: 0, label: { ko: "극히 드물다 (1일 이하)", en: "Rarely or none of the time (less than 1 day)", ja: "ほとんどなかった（1日以下）" } },
