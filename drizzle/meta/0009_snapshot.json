@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "f815ca4d-c1b4-4cf0-94d0-7ec84e2aa706",
-  "prevId": "d4d4a172-9890-47a4-9066-24e8cdd41226",
+  "id": "5bd35994-ceb5-44ac-ae46-ba4db93891ac",
+  "prevId": "f815ca4d-c1b4-4cf0-94d0-7ec84e2aa706",
   "tables": {
     "anonymous_sessions": {
       "name": "anonymous_sessions",
@@ -709,7 +709,8 @@
           "type": "varchar(30)",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false
+          "autoincrement": false,
+          "default": "''"
         },
         "응답언어": {
           "name": "응답언어",
