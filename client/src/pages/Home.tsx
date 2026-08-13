@@ -21,9 +21,9 @@ type SatisfactionQuestion = { id: string; sortOrder: number; question: Record<"k
 export const DEFAULT_COUNSELING_APPLICATION_URL = "https://home.sch.ac.kr/counsel/02/010100.jsp";
 
 export const PRIZE_CONTACT_COPY = {
-  ko: { label: "연락처 (당첨 안내용)", placeholder: "예: 010-1234-5678", collection: "당첨될 경우 안내를 받을 수 있는 연락처를 남겨 주세요. 입력한 연락처는 당첨 안내와 학생 지원 목적 외에는 사용하지 않으며, 운영자 비밀번호 확인 후 권한 있는 담당자만 확인할 수 있습니다." },
-  en: { label: "Phone number (for prize notification)", placeholder: "e.g. 010-1234-5678", collection: "Please leave a phone number where you can receive a notification if selected for a prize. It is used only for prize notification and student support, and is visible only to authorized staff after administrator-password verification." },
-  ja: { label: "連絡先（当選案内用）", placeholder: "例：010-1234-5678", collection: "当選した場合にご案内を受け取れる連絡先を入力してください。連絡先は当選案内と学生支援以外には使用せず、管理者パスワードを確認した権限のある担当者のみが確認します。" },
+  ko: { label: "연락처 (당첨 및 프로그램 안내)", placeholder: "예: 010-1234-5678", collection: "당첨 및 프로그램 안내를 받을 수 있는 연락처를 남겨 주세요. 입력한 연락처는 당첨·프로그램 안내와 학생 지원 목적 외에는 사용하지 않으며, 운영자 비밀번호 확인 후 권한 있는 담당자만 확인할 수 있습니다." },
+  en: { label: "Phone number (prize & program updates)", placeholder: "e.g. 010-1234-5678", collection: "Please leave a phone number where you can receive prize and program updates. It is used only for prize and program notifications and student support, and is visible only to authorized staff after administrator-password verification." },
+  ja: { label: "連絡先（当選・プログラム案内）", placeholder: "例：010-1234-5678", collection: "当選・プログラムの案内を受け取れる連絡先を入力してください。連絡先は当選・プログラム案内と学生支援以外には使用せず、管理者パスワードを確認した権限のある担当者のみが確認します。" },
 } as const;
 const CONTACT_NUMBER_PATTERN = /^[0-9+() -]{7,32}$/;
 

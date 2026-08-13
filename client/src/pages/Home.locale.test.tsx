@@ -55,9 +55,9 @@ describe("localized public station experience", () => {
     expect(getSatisfactionAccessibleLabel("😣 Very dissatisfied")).toBe("Very dissatisfied");
   });
   it("explains prize-notification contact collection in every supported language", () => {
-    expect(PRIZE_CONTACT_COPY.ko.label).toContain("당첨 안내용");
-    expect(PRIZE_CONTACT_COPY.ko.collection).toContain("당첨될 경우 안내를 받을 수 있는 연락처");
-    expect(PRIZE_CONTACT_COPY.en.label).toContain("prize notification");
-    expect(PRIZE_CONTACT_COPY.ja.label).toContain("当選案内用");
+    expect(PRIZE_CONTACT_COPY.ko.label).toBe("연락처 (당첨 및 프로그램 안내)");
+    expect(PRIZE_CONTACT_COPY.ko.collection).toContain("당첨 및 프로그램 안내를 받을 수 있는 연락처");
+    expect(PRIZE_CONTACT_COPY.en.label).toContain("prize & program updates");
+    expect(PRIZE_CONTACT_COPY.ja.label).toContain("当選・プログラム案内");
   });
 });
