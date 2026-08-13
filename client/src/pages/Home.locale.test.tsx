@@ -7,7 +7,7 @@ vi.mock("@/contexts/LanguageContext", () => ({ useLanguage: () => ({ locale: lan
 
 import { SATISFACTION_OPTIONS, STATION_COPY } from "@/data/stationContent";
 import { getCesdResultGuidance, getPssResultGuidance } from "@/data/scoreResultGuidance";
-import { DEFAULT_COUNSELING_APPLICATION_URL, getSatisfactionAccessibleLabel, QuestionnaireCard, ResultCard } from "./Home";
+import { DEFAULT_COUNSELING_APPLICATION_URL, getSatisfactionAccessibleLabel, PRIZE_CONTACT_COPY, QuestionnaireCard, ResultCard } from "./Home";
 
 function renderSurvey(locale: "en" | "ja") {
   language.locale = locale;
@@ -53,5 +53,11 @@ describe("localized public station experience", () => {
   it("creates an icon-free accessible name for satisfaction option labels", () => {
     expect(getSatisfactionAccessibleLabel("😍 매우 만족")).toBe("매우 만족");
     expect(getSatisfactionAccessibleLabel("😣 Very dissatisfied")).toBe("Very dissatisfied");
+  });
+  it("explains prize-notification contact collection in every supported language", () => {
+    expect(PRIZE_CONTACT_COPY.ko.label).toContain("당첨 안내용");
+    expect(PRIZE_CONTACT_COPY.ko.collection).toContain("당첨될 경우 안내를 받을 수 있는 연락처");
+    expect(PRIZE_CONTACT_COPY.en.label).toContain("prize notification");
+    expect(PRIZE_CONTACT_COPY.ja.label).toContain("当選案内用");
   });
 });

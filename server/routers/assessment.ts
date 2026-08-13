@@ -23,7 +23,7 @@ function parseSatisfactionAnswers(serialized: string) {
 export const assessmentRouter = router({
   ownerAccess: ownerProcedure.query(() => true as const),
   submit: publicProcedure.input(z.object({
-    anonymousSessionId: z.string().uuid(), locale: localeSchema, studentName: z.string().trim().min(1).max(120), studentId: z.string().trim().min(1).max(64), department: z.string().trim().min(1).max(160),
+    anonymousSessionId: z.string().uuid(), locale: localeSchema, studentName: z.string().trim().min(1).max(120), studentId: z.string().trim().min(1).max(64), contactNumber: z.string().trim().min(7).max(32).regex(/^[0-9+() -]+$/, "연락처 형식을 확인해 주세요."), department: z.string().trim().min(1).max(160),
     personalDataConsent: z.literal(true), counselingContactConsent: z.boolean(),
     cesdAnswers: z.array(z.number().int().min(0).max(3)).length(20), pssAnswers: z.array(z.number().int().min(0).max(4)).length(10),
     satisfactionAnswers: z.array(satisfactionAnswerSchema).max(6),

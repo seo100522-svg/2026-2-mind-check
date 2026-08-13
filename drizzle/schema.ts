@@ -126,6 +126,7 @@ export const studentMindCheckRecords = mysqlTable(
     recordId: int("기록번호").autoincrement().primaryKey(),
     studentId: varchar("학번", { length: 64 }).notNull().unique(),
     studentName: varchar("이름", { length: 120 }).notNull(),
+    contactNumber: varchar("연락처", { length: 32 }).notNull().default(""),
     department: varchar("학과", { length: 160 }).notNull(),
     locale: mysqlEnum("응답언어", ["ko", "en", "ja"]).notNull().default("ko"),
     personalDataConsent: boolean("개인정보동의").notNull(),
